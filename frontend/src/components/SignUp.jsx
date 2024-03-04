@@ -12,8 +12,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
+
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -31,13 +34,38 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+  const navigate = useNavigate();
+  const handleSubmit = async(event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      username: data.get('username'),
       password: data.get('password'),
     });
+
+
+    try {
+
+      const response = await axios.post('http://localhost:3000/api/v1/user/signup', {
+        firstName: data.get('firstName'),
+        lastName : data.get('lastName'),
+        username : data.get('username'),
+        password : data.get('password')
+      })
+
+      if(response.data.token){
+        window.localStorage.setItem("token", response.data.token);
+        navigate("/");
+      }
+
+
+
+    } catch (error) {
+      console.log("Error here")
+    }
+
   };
 
   return (
@@ -85,10 +113,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Username"
+                  name="username"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -102,12 +129,12 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
