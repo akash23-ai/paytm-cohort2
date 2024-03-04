@@ -5,7 +5,6 @@ const {Account} = require("../models/bank.model")
 
 const signUpValidation = zod.object({
     username : zod.string(),
-    
     password : zod.string(),
     firstName : zod.string(),
     lastName : zod.string()
@@ -46,7 +45,7 @@ const register = async (req, res) => {
     await Account.create(
        {
         userId : createdUser.username,
-        balance : Math.random() * 10000 + 1
+        balance : Math.floor(Math.random() * 10000 + 1)
        }
     )
 
@@ -75,7 +74,18 @@ const updateDetails = async(req, res) => {
     return res.status(200).json({updatedUser, message :"user updated successfully"});
 }
 
+
+
+const login = async (req, res) => {
+  const user = await User.findOne({username : req.userId})
+  
+  if(!user) return res.status(404).json({message : "No User Found"})
+
+  return res.status(200).json({user, message: "User is here"})
+}
+
 module.exports = {
     register,
-    updateDetails
+    updateDetails,
+    login
 }

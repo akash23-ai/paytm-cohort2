@@ -58,7 +58,7 @@ function DashBoard({token}) {
   const handleChange = async(e) => {
     setSearch(e.target.value)
 
-    const response = await fetch('http://localhost:3000/api/v1/user/bulk', {
+    const response = await fetch('http://localhost:3000/api/v1/user/bulk?filter='+ e.target.value, {
       method : "GET",
       headers : {
         "Content-Type" : "application/json"

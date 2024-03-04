@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 const cors = require('cors')
 
 
+app.use(cors())
 
 dotenv.config({
     path: './.env'

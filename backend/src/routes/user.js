@@ -1,11 +1,11 @@
 const express = require('express')
-const {register, updateDetails} = require('../controller/user.controller');
+const {register, updateDetails, login} = require('../controller/user.controller');
 const { authMiddleware } = require('../middleware/auth.middelware');
 const userRouter = express.Router()
 const {User} = require('../models/user.model')
 
 userRouter.route('/signup').post(register)
-userRouter.route('/login').post(authMiddleware);
+userRouter.route('/login').post(authMiddleware, login);
 userRouter.route('/update').put(authMiddleware,updateDetails)
 
 // need to understand
