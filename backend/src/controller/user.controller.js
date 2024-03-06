@@ -84,8 +84,19 @@ const login = async (req, res) => {
   return res.status(200).json({user, message: "User is here"})
 }
 
+const getUser = async (req, res) => {
+    const {id} = req.params;
+
+    const user = await User.findById(id);
+
+    if(!user) return res.status(404).json({message : "User Not Found"})
+
+    return res.status(200).json({user, message : "This is your user"})
+}
+
 module.exports = {
     register,
     updateDetails,
-    login
+    login,
+    getUser
 }

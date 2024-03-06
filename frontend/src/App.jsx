@@ -22,7 +22,7 @@ function App() {
        } />
         <Route path="/signup" element = {<SignUp  />} />
         <Route path="/signin" element = {<SignIn />} />
-        <Route path="/send" element = {<Transfer />} />
+        <Route path="/transfer/:id" element = {<Transfer />} />
       </Routes></div>
      
     </BrowserRouter>

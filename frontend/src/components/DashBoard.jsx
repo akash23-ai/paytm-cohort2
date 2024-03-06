@@ -71,35 +71,7 @@ function DashBoard({token}) {
 
   }
 
-  const sendMoneyTo = async(user, index) => {
-    console.log(user)
-   const response = await fetch(`http://localhost:3000/api/v1/account/transfer`, {
-      method : "POST", 
-      headers : {
-        "Content-Type" : "application/json",
-        "Authorization" : `Bearer ${token}`
-      },
-      body : JSON.stringify({
-        amount : 100,
-        to : user.username
-      
-      })
-
-   })
-
-   const balance = await fetch('http://localhost:3000/api/v1/account/balance', {
-      method : "GET",
-      headers : {
-        "Content-Type" : "application/json",
-        "Authorization" : `Bearer ${token}`
-      }
-   })
-   const responsbalance = await balance.json()
-
-   setAccount(responsbalance)
-
-
-  }
+  
 
 
 
@@ -122,7 +94,7 @@ function DashBoard({token}) {
           return <div key={index} className="flex justify-between my-2">
             <h1>{user.username}</h1>
 
-            <button className="bg-green-600 py-2 px-4 rounded-md text-white font-medium" onClick={() => sendMoneyTo(user, index)}>Send Money</button>
+            <button className="bg-green-600 py-2 px-4 rounded-md text-white font-medium" onClick={() => navigate(`transfer/${user._id}`)}>Send Money</button>
           </div>
         })}
        </div>
