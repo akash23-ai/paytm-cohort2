@@ -1,19 +1,16 @@
-import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Protected({children, token}) {
+export default function Protected({children}) {
 
     const navigate = useNavigate()
-    const [loader, setLoader] = useState(true)
+    const token = localStorage.getItem("token")
 
-    useEffect(() => {
-       
-
-        navigate('/')
-        setLoader(false)
-    })
+    if(!token){
+      navigate('/')
+      return
+    }
 
 
-  return  loader? <h1>Loading ....</h1>:<h1>{children}</h1>
+  return  children
 }
 

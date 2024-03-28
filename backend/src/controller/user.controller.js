@@ -91,6 +91,7 @@ const getUser = async (req, res) => {
 
     if(!user) return res.status(404).json({message : "User Not Found"})
 
+    console.log("Here i am")
     return res.status(200).json({user, message : "This is your user"})
 }
 
