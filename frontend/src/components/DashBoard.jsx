@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import Spinner from "./ui/Spinner";
-import AvatarComponent from "./ui/AvatarComponent";
+import Navbar from "./ui/Navbar";
+
 
 
 function DashBoard({ token }) {
@@ -20,7 +21,7 @@ function DashBoard({ token }) {
 
     console.log(token);
     const fetchUser = async () => {
-      const response = await fetch("http://localhost:3000/api/v1/user/login", {
+      const response = await fetch("http://localhost:3000/api/v1/user/me", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,6 +46,8 @@ function DashBoard({ token }) {
       );
 
       const data = await response.json();
+
+      console.log(data)
       setAccount(data);
     };
 
@@ -75,16 +78,8 @@ function DashBoard({ token }) {
   if (!user) return <Spinner/>;
   return (
     <div className="h-full w-[95%] text-lg font-bold">
-      <nav className="p-4 flex justify-between items-center border-b border-solid border-gray-600">
-        <h1 className="text-3xl font-bold ">Payment App</h1>
-        <div className="flex justify-center items-center">
-          <h2 className="text-lg font-medium mr-2">
-            Hello, {user.user.firstName}
-          </h2>
-          <AvatarComponent />
-        
-        </div>
-      </nav>
+      <Navbar user= {user} />
+
       <div className="mt-6 text-xl ml-6 h-full w-full">
         <h1> Your Balance ${account.balance}</h1>
         <h2 className="text-2xl mt-6 mb-4"> Users : </h2>
@@ -117,14 +112,3 @@ function DashBoard({ token }) {
 }
 
 export default DashBoard;
-
-
-
-
-
-
-// <Avatar
-//               sx={{ m: 1, bgcolor: "secondary.main" }}
-//               id={"avatar"}
-//               sizes="20px"
-//             ></Avatar>

@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp"
 import SignIn from "./components/SignIn";
 import DashBoard from "./components/DashBoard"
 import { useEffect, useState } from "react";
 import AuthLayOut from "./components/AuthLayOut";
-import Logout from "./components/Logout";
+
 import Setting from "./components/Setting";
 import Transfer from "./components/Transfer"
 import './App.css'
@@ -25,7 +25,7 @@ function App() {
         <Route path="/signup" element = {<SignUp  />} />
         <Route path="/signin" element = {<SignIn />} />
         <Route path="/settings" element = {<AuthLayOut><Setting /></AuthLayOut>} />
-        <Route path="/logout" element = {<AuthLayOut><Logout/></AuthLayOut>} />
+        {/* <Route path="/logout" element = {<AuthLayOut><Logout/></AuthLayOut>} /> */}
         <Route path="/transfer/:id" element = {<AuthLayOut><Transfer /></AuthLayOut>} />
       </Routes></div>
      

@@ -6,7 +6,7 @@ const { default: mongoose } = require("mongoose")
 
 
 const getBalance = async(req, res) => {
-
+    console.log("Yaha par")
     console.log(req.userId)
     try {
         const balance = await Account.findOne(

@@ -8,7 +8,7 @@ import {
   Tooltip,
   Avatar,
 } from "@mui/material";
-import { PersonAdd, Settings, Logout, Link } from "@mui/icons-material";
+import { PersonAdd, Settings, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 export default function AvatarComponent() {
@@ -25,6 +25,12 @@ export default function AvatarComponent() {
   };
 
   const handleCloseItem = (action) => {
+
+    if(action === "logout"){
+        localStorage.clear()
+        navigate("/signup")
+        return
+    }
     console.log(action);
     setAnchor(null);
     navigate("/" + action);
