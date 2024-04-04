@@ -30,7 +30,7 @@ function DashBoard({ token }) {
       });
       const data = await response.json();
       setUser(data);
-      console.log("Hello");
+      console.log(data)
     };
 
     const fetchAccount = async () => {
